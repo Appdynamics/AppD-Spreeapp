@@ -1,6 +1,6 @@
 # AppD-Spreeapp
 
-Containerized instrumentation of the Spree Commerce application using with AppDynamics
+Containerized instrumentation of the Spree Commerce application using AppDynamics
 
 # Configure the AppDynamics controller information in the file:
 spreeapp-config/appdynamics.yml
