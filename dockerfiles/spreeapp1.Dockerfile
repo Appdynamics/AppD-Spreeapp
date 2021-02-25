@@ -1,5 +1,7 @@
 FROM spreecommerce/spree:3.6.4
-
+#
+# Maintainer: David Ryder
+#
 # https://hub.docker.com/r/spreecommerce/spree/tags?page=1&ordering=last_updated
 
 ARG USER
