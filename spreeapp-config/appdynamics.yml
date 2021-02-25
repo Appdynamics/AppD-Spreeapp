@@ -1,0 +1,10 @@
+app_name: SpreeApp1
+tier_name: SpreeTier1
+node_name: SpreeNode1
+controller:
+  host: TEST.saas.appdynamics.com
+  port: 443
+  account: TEST
+  access_key: --------------
+  use_ssl: true
+  log_level: debug
