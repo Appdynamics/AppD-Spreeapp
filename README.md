@@ -1,6 +1,6 @@
 # AppD-Spreeapp
 
-Example instrumentation of the Spree Commerce instrumented with appdynamics
+Containerized instrumentation of the Spree Commerce application using with AppDynamics
 
 # Configure the AppDynamics controller information in the file:
 spreeapp-config/appdynamics.yml
@@ -11,4 +11,13 @@ spreeapp-config/appdynamics.yml
 # Start the container
 ./ctl.sh run spreeapp1
 
-# Review the AppDynamics controller for the Application SpreeApp
+
+The container starts a simple load generator on the Spree application
+
+Review the AppDynamics controller for the Application SpreeApp1
+
+# Bash into the container to review the configuration
+./ctl.sh bash spreeapp1
+
+# Stop the container
+./ctl.sh stop spreeapp1
