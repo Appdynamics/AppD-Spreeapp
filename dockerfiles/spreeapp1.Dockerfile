@@ -26,6 +26,4 @@ RUN cp ${HOME_DIR}/spreeapp-config/appdynamics.yml ${SPREE_APP_DIR}/config/appdy
 
 EXPOSE 3000
 
-ENTRYPOINT sleep 3600
-
 ENTRYPOINT ./${HOME_DIR}/ctl.sh start-container
