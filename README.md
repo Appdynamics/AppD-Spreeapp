@@ -1,4 +1,4 @@
-# AppDynmaics Spree Commerce Application Instrumentation
+# AppDynamics Spree Commerce Application Instrumentation
 
 Containerized instrumentation of the Spree Commerce application using AppDynamics 
 
