@@ -2,6 +2,7 @@
 #
 # Maintainer: David Ryder
 #
+# Requires: docker, jq
 CMD=${1:-"help"}
 CMD_ARGS_LEN=${#}
 
@@ -26,6 +27,7 @@ _buildContainer() {
   $DOCKER_CMD build \
     --build-arg USER=$USER \
     --build-arg HOME_DIR=$HOME_DIR \
+    --build-arg SPREE_APP_DIR=$SPREE_APP_DIR \
     -t $DOCKER_TAG_NAME \
     --file $DOCKERFILE .
 }
@@ -82,9 +84,47 @@ _dockerStop() {
   fi
 }
 
+_SpreeAppLoadGen() {
+  INTERATIONS_N=999999
+  INTERVAL_SEC=5
+  DURATION_SEC=7200
+
+  HOST="localhost"
+  PORT="3000"
+  API="/"
+
+  URL_LIST=("/t/bags" "/t/mugs" "/t/clothing" "/t/ruby" "/t/apache" "/t/spree" "/cart" "/")
+  URL_LIST_LEN=${#URL_LIST[@]}
+
+  echo "Starting loadgen"
+  START_TIME=$(date +%s)
+  END_TIME=$(( START_TIME + DURATION_SEC ))
+  for i in $(seq $INTERATIONS_N )
+  do
+    URL_N=$(( RANDOM % URL_LIST_LEN ))
+    API="${URL_LIST[$URL_N]}"
+    echo "Calling: $HOST:$PORT$API $i"
+    curl -G $HOST:$PORT$API
+    TIME_NOW=$(date +%s)
+    if [ "$TIME_NOW" -gt "$END_TIME" ]; then
+      echo "Stopping"
+      break;
+    else
+      sleep $INTERVAL_SEC
+    fi
+  done
+  echo "Stopping loadgen"
+}
+
 case "$CMD" in
   test)
     echo "Test"
+    ;;
+  start-container)
+    cd $SPREE_APP_DIR
+    bundle install
+    rails s -b 0.0.0.0 -p 3000 &
+    _SpreeAppLoadGen
     ;;
   build) # Expects Argument APP_ID
     DOCKER_TAG_NAME=${2:-"DOCKER_TAG_MISSING"}

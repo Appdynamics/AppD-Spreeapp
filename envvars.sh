@@ -1,4 +1,5 @@
 export USER="ddr"
 export HOME_DIR="/spree"
+export SPREE_APP_DIR="/spree/sandbox"
 export DOCKERFILES_DIR="dockerfiles"
 export DOCKER_NETWORK_NAME="spreeappnet1"

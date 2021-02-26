@@ -6,22 +6,26 @@ FROM spreecommerce/spree:3.6.4
 
 ARG USER
 ARG HOME_DIR
+ARG SPREE_APP_DIR
 
 #USER $USER
-COPY ctl.sh /spree/sandbox/
+COPY ctl.sh ${HOME_DIR}
+COPY envvars.sh ${HOME_DIR}
 RUN mkdir ${HOME_DIR}/spreeapp-config/
 ADD spreeapp-config ${HOME_DIR}/spreeapp-config/
 # Backups
-RUN cp /spree/sandbox/config/application.rb ${HOME_DIR}/spreeapp-config/orig-application.rb
-RUN cp /spree/sandbox/config/database.yml ${HOME_DIR}/spreeapp-config/orig-database.yml
-RUN cp /spree/sandbox/Gemfile ${HOME_DIR}/spreeapp-config/orig-Gemfile
+RUN cp ${SPREE_APP_DIR}/config/application.rb ${HOME_DIR}/spreeapp-config/orig-application.rb
+RUN cp ${SPREE_APP_DIR}/config/database.yml   ${HOME_DIR}/spreeapp-config/orig-database.yml
+RUN cp ${SPREE_APP_DIR}/Gemfile               ${HOME_DIR}/spreeapp-config/orig-Gemfile
 
 # Overwrite
-RUN cp ${HOME_DIR}/spreeapp-config/application.rb /spree/sandbox/config/application.rb
-#RUN cp ${HOME_DIR}/spreeapp-config/postgresql-database.yml /spree/sandbox/config/database.yml
-RUN cp ${HOME_DIR}/spreeapp-config/sandbox-Gemfile /spree/sandbox/Gemfile
-RUN cp ${HOME_DIR}/spreeapp-config/appdynamics.yml /spree/sandbox/config/appdynamics.yml
+RUN cp ${HOME_DIR}/spreeapp-config/application.rb  ${SPREE_APP_DIR}/config/application.rb
+#RUN cp ${HOME_DIR}/spreeapp-config/postgresql-database.yml ${SPREE_APP_DIR}/config/database.yml
+RUN cp ${HOME_DIR}/spreeapp-config/sandbox-Gemfile ${SPREE_APP_DIR}/Gemfile
+RUN cp ${HOME_DIR}/spreeapp-config/appdynamics.yml ${SPREE_APP_DIR}/config/appdynamics.yml
 
 EXPOSE 3000
 
-ENTRYPOINT [ "/spree/spreeapp-config/container-start.sh" ]
+ENTRYPOINT sleep 3600
+
+ENTRYPOINT ./${HOME_DIR}/ctl.sh start-container
