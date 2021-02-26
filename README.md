@@ -6,7 +6,8 @@ Requires: docker and jq
 
 ## Configure the AppDynamics controller information in the file:
 
-```spreeapp-config/appdynamics.yml
+```
+spreeapp-config/appdynamics.yml
 ```
 
 ## Build the Container
