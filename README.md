@@ -1,6 +1,7 @@
 # AppD-Spreeapp
 
 Containerized instrumentation of the Spree Commerce application using AppDynamics
+
 Requires: docker and jq
 
 # Configure the AppDynamics controller information in the file:
