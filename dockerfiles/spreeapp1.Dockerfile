@@ -24,7 +24,4 @@ RUN cp ${HOME_DIR}/spreeapp-config/appdynamics.yml /spree/sandbox/config/appdyna
 
 EXPOSE 3000
 
-#ENTRYPOINT [ "./ctl.sh", "spreeapp-new-start" ]
-
-#ENTRYPOINT [ "./ctl.sh", "hold" ]
 ENTRYPOINT [ "/spree/spreeapp-config/container-start.sh" ]
