@@ -21,7 +21,3 @@ Review the AppDynamics controller for the Application SpreeApp1
 
 # Stop the container
 ./ctl.sh stop spreeapp1
-<<<<<<< HEAD
-=======
-
->>>>>>> 2cdab4ebdec35626ee521cd50ca50b4e8253bad4
