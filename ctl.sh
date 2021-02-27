@@ -126,6 +126,12 @@ case "$CMD" in
     rails s -b 0.0.0.0 -p 3000 &
     _SpreeAppLoadGen
     ;;
+  start-ruby1)
+    #cd $SPREE_APP_DIR
+    #bundle install
+    rails server -b 0.0.0.0 -p 3000 &
+    sleep 86400
+    ;;
   build) # Expects Argument APP_ID
     DOCKER_TAG_NAME=${2:-"DOCKER_TAG_MISSING"}
     _buildContainer $DOCKER_TAG_NAME
@@ -138,7 +144,9 @@ case "$CMD" in
     if [ $DOCKER_TAG_NAME == "spreeapp1" ]; then
         EXTRA_ARGS="-p 3000:3000"
     elif [ $DOCKER_TAG_NAME == "spreeapp2" ]; then
-        EXTRA_ARGS="-p 3001:3001"
+          EXTRA_ARGS="-p 3001:3001"
+    elif [ $DOCKER_TAG_NAME == "ruby1" ]; then
+        EXTRA_ARGS="-p 3000:3000"
     elif [ $DOCKER_TAG_NAME == "postgres" ]; then
         EXTRA_ARGS="-p 5432:5432"
     elif [ $DOCKER_TAG_NAME$ID == "mysql0" ]; then
@@ -153,6 +161,9 @@ case "$CMD" in
   bash)
     DOCKER_TAG_NAME=${2:-"DOCKER TAG MISSING"}
     _dockerBash
+    ;;
+  hold)
+    sleep 86400
     ;;
   *)
     echo "Not Found " "$@"
