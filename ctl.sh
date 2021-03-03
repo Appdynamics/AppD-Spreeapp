@@ -147,6 +147,8 @@ case "$CMD" in
           EXTRA_ARGS="-p 3001:3001"
     elif [ $DOCKER_TAG_NAME == "ruby1" ]; then
         EXTRA_ARGS="-p 3000:3000"
+    elif [ $DOCKER_TAG_NAME == "ruby2" ]; then
+        EXTRA_ARGS="-p 3000:3000"
     elif [ $DOCKER_TAG_NAME == "postgres" ]; then
         EXTRA_ARGS="-p 5432:5432"
     elif [ $DOCKER_TAG_NAME$ID == "mysql0" ]; then
